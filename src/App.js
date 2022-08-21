@@ -13,9 +13,11 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const searchMovies = async (title) => {
-    const respone = await axios.get(`${API_URL}&s=${title}`)
-    const data = await respone.data;
-    setMovies(data.Search);
+    axios.get(`${API_URL}&s=${title}`).then((res) => {
+      const data = res.data;
+      setMovies(data.Search);
+    })
+
   }
 
   useEffect((searchTerm) => {
