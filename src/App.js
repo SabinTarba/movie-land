@@ -13,10 +13,14 @@ const App = () => {
 
 
   const searchMovies = async (title) => {
-    const response = await fetch(`${API_URL}&s=${title}`);
-    const data = await response.json();
+    await fetch(`${API_URL}&s=${title}`,
+      {
+        credentials: 'same-origin',
+        mode: 'cors'
+      })
+      .then((response) => response.json())
+      .then((data) => setMovies(data.Search));
 
-    setMovies(data.Search);
   };
 
   useEffect((searchTerm) => {
